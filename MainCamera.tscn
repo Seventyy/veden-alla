@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://main_camera.gd" type="Script" id=1]
+
+[node name="MainCamera" type="Camera2D"]
+anchor_mode = 0
+current = true
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+timer_position = NodePath("TimerPostion")
+timer_rotation = NodePath("TimerRotation")
+timer_zoom = NodePath("TimerZoom")
+tween = NodePath("../MainCamera/Tween")
+
+[node name="TimerPostion" type="Timer" parent="."]
+
+[node name="TimerRotation" type="Timer" parent="."]
+
+[node name="TimerZoom" type="Timer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="timeout" from="TimerPostion" to="." method="_on_TimerPostion_timeout"]
+[connection signal="timeout" from="TimerRotation" to="." method="_on_TimerRotation_timeout"]
+[connection signal="timeout" from="TimerZoom" to="." method="_on_TimerZoom_timeout"]
