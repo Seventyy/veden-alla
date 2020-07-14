@@ -2,7 +2,7 @@ extends Particles2D
 
 class_name OneShotParticles2D
 
-func _ready():
+func _ready() -> void:
 	one_shot = true
 	explosiveness = 1.0
 	emitting = true

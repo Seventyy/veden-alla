@@ -13,7 +13,7 @@ export (NodePath) onready var timer_rotation = get_node(timer_rotation) as Timer
 export (NodePath) onready var timer_zoom = get_node(timer_zoom) as Timer 
 export (NodePath) onready var tween = get_node(tween) as Tween 
 
-func _process(delta):
+func _process(delta) -> void:
 	if shaking_position or magnitude_rotation or magnitude_zoom:
 		rand.randomize()
 		if shaking_position:
@@ -23,32 +23,32 @@ func _process(delta):
 		if magnitude_zoom:
 			zoom = Vector2(2 * rand.randf() - 1, 2 * rand.randf() - 1).normalized() * magnitude_zoom + Vector2(1,1) 
 
-func shake_position(ss_magnitude = 5, ss_duration = 0.5, transition_type = Tween.TRANS_EXPO, ease_type = Tween.EASE_OUT):
+func shake_position(ss_magnitude = 5, ss_duration = 0.5, transition_type = Tween.TRANS_EXPO, ease_type = Tween.EASE_OUT) -> void:
 	tween.interpolate_property(self, "magnitude_position", ss_magnitude, 0, ss_duration, transition_type, ease_type)
 	tween.start()
 	timer_position.wait_time = ss_duration
 	timer_position.start()
 	shaking_position = true
 
-func shake_rotation(ss_magnitude = 5, ss_duration = 0.5, transition_type = Tween.TRANS_EXPO, ease_type = Tween.EASE_OUT):
+func shake_rotation(ss_magnitude = 5, ss_duration = 0.5, transition_type = Tween.TRANS_EXPO, ease_type = Tween.EASE_OUT) -> void:
 	tween.interpolate_property(self, "magnitude_rotation", ss_magnitude, 0, ss_duration, transition_type, ease_type)
 	tween.start()
 	timer_rotation.wait_time = ss_duration
 	timer_rotation.start()
 	shaking_rotation = true
 
-func shake_zoom(ss_magnitude = 5, ss_duration = 0.5, transition_type = Tween.TRANS_EXPO, ease_type = Tween.EASE_OUT):
+func shake_zoom(ss_magnitude = 5, ss_duration = 0.5, transition_type = Tween.TRANS_EXPO, ease_type = Tween.EASE_OUT) -> void:
 	tween.interpolate_property(self, "magnitude_zoom", ss_magnitude, 0, ss_duration, transition_type, ease_type)
 	tween.start()
 	timer_zoom.wait_time = ss_duration
 	timer_zoom.start()
 	shaking_zoom = true
 
-func _on_TimerPostion_timeout():
+func _on_TimerPostion_timeout() -> void:
 	shaking_position = false
 
-func _on_TimerRotation_timeout():
+func _on_TimerRotation_timeout() -> void:
 	shaking_rotation = false
 
-func _on_TimerZoom_timeout():
+func _on_TimerZoom_timeout() -> void:
 	magnitude_zoom = false
